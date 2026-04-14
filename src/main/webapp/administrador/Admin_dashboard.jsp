@@ -87,36 +87,33 @@
 
 					<div class="col-12 col-md-6">
 						<div class="card h-100">
-							<h5 class="card-header">Módulo 4</h5>
+							<h5 class="card-header">VIAJES</h5>
 							<div class="card-body">
-								<h5 class="card-title">Special title treatment</h5>
-								<p class="card-text">With supporting text below as a natural
-									lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+								<h5 class="card-title">Tabla de viajes</h5>
+								<p class="card-text">Apartado para registrar, editar, visualizar y eliminar Viajes.</p>
+								<a href="#" class="btn btn-primary">Ir a Viajes</a>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-12 col-md-6">
 						<div class="card h-100">
-							<h5 class="card-header">Módulo 5</h5>
+							<h5 class="card-header">RESERVAS</h5>
 							<div class="card-body">
-								<h5 class="card-title">Special title treatment</h5>
-								<p class="card-text">With supporting text below as a natural
-									lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+								<h5 class="card-title">Tabla de reservas</h5>
+								<p class="card-text">Apartado para registrar, editar, visualizar y eliminar Reservas.</p>
+								<a href="#" class="btn btn-primary">Ir a Reservas</a>
 							</div>
 						</div>
 					</div>
 
 					<div class="col-12 col-md-6">
 						<div class="card h-100">
-							<h5 class="card-header">Módulo 6</h5>
+							<h5 class="card-header">USUARIOS</h5>
 							<div class="card-body">
-								<h5 class="card-title">Special title treatment</h5>
-								<p class="card-text">With supporting text below as a natural
-									lead-in to additional content.</p>
-								<a href="#" class="btn btn-primary">Go somewhere</a>
+								<h5 class="card-title">Tabla de Usuarios</h5>
+								<p class="card-text">Apartado para registrar, editar, visualizar y eliminar cuentas de Usuario.</p>
+								<a href="#" class="btn btn-primary">Ir a Usuarios</a>
 							</div>
 						</div>
 					</div>
