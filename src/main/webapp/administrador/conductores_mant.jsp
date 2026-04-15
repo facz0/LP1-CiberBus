@@ -20,12 +20,7 @@
 			<div class="col py-3 px-4" style="height: 100vh; overflow-y: auto;">
 			
 				<h1 class="mb-4">Panel de Mantenimiento</h1>
-				<div class="alert alert-success">¡El sidebar ahora está pegado
-					a la izquierda, es vertical y 100% responsivo!
-				</div>
-				<p>Achica la ventana del navegador para ver cómo aparece el
-					botón de hamburguesa.
-				</p>
+				
 			</div>
 
 		</div>
