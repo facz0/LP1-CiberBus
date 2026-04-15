@@ -13,13 +13,13 @@
 
 			<ul class="nav nav-pills flex-column mb-auto w-100">
 				<li class="nav-item mb-1"><a class="nav-link active"
-					aria-current="page" href="#">Página de inicio</a></li>
+					aria-current="page" href="Admin_dashboard">Página de inicio</a></li>
 				<li class="nav-item mb-1"><hr></li>
 				<li class="nav-item mb-1"><spam class="nav-link active"
 						aria-current="page">Manteniemiento</spam></li>
 				<li class="nav-item mb-1"><hr></li>
 				<li class="nav-item mb-1"><a class="nav-link link-dark"
-					href="#">Conductores</a></li>
+					href="Conductor">Conductores</a></li>
 				<li class="nav-item mb-1"><a class="nav-link link-dark"
 					href="#">Buses</a></li>
 				<li class="nav-item mb-1"><a class="nav-link link-dark"

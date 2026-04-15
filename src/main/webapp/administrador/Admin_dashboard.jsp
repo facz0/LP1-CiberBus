@@ -58,7 +58,7 @@
 							<div class="card-body">
 								<h5 class="card-title">Tabla de conductores</h5>
 								<p class="card-text">Apartado para registrar, editar, visualizar y eliminar conductores.</p>
-								<a href="#" class="btn btn-primary">Ir a Conductores</a>
+								<a href="Conductor" class="btn btn-primary">Ir a Conductores</a>
 							</div>
 						</div>
 					</div>

@@ -10,7 +10,7 @@ public class Conductor {
 	private String apellidos;
 	private String correo;
 	private String categoriaLicencia;
-	private String disDescanso;
+	private String diaDescanso;
 	private LocalDate vencimientoLicencia;
 	private int estado;
 	
@@ -24,14 +24,14 @@ public class Conductor {
 		this.apellidos = apellidos;
 		this.correo = correo;
 		this.categoriaLicencia = categoriaLicencia;
-		this.disDescanso = disDescanso;
+		this.diaDescanso = diaDescanso;
 		this.vencimientoLicencia = vencimientoLicencia;
 		this.estado = estado;
 	}
 	
 	public Conductor(String tipoDocumento, int numeroDocumento, String nombre, String apellidos,
-			String correo, String categoriaLicencia, String disDescanso, LocalDate vencimientoLicencia, int estado) {
-		this(0, tipoDocumento, numeroDocumento, nombre, apellidos, correo, categoriaLicencia, disDescanso,
+			String correo, String categoriaLicencia, String diaDescanso, LocalDate vencimientoLicencia, int estado) {
+		this(0, tipoDocumento, numeroDocumento, nombre, apellidos, correo, categoriaLicencia, diaDescanso,
 				vencimientoLicencia, estado);
 	}
 	
@@ -95,12 +95,12 @@ public class Conductor {
 		this.categoriaLicencia = categoriaLicencia;
 	}
 
-	public String getDisDescanso() {
-		return disDescanso;
+	public String getDiaDescanso() {
+		return diaDescanso;
 	}
 
-	public void setDisDescanso(String disDescanso) {
-		this.disDescanso = disDescanso;
+	public void setDiaDescanso(String disDescanso) {
+		this.diaDescanso = disDescanso;
 	}
 
 	public LocalDate getVencimientoLicencia() {

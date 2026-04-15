@@ -12,4 +12,6 @@ public interface IConductorDAO {
 	public int actualizar(Conductor conductor);	
 	public int eliminar(int conductorId);
 	
+	public ArrayList<Conductor> buscar(String texto); 
+	
 }
