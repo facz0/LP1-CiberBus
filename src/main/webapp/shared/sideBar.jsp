@@ -19,7 +19,7 @@
 						aria-current="page">Manteniemiento</spam></li>
 				<li class="nav-item mb-1"><hr></li>
 				<li class="nav-item mb-1"><a class="nav-link link-dark"
-					href="Conductor">Conductores</a></li>
+					href="administrador/Conductor">Conductores</a></li>
 				<li class="nav-item mb-1"><a class="nav-link link-dark"
 					href="#">Buses</a></li>
 				<li class="nav-item mb-1"><a class="nav-link link-dark"

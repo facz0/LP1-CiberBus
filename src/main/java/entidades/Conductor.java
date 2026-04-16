@@ -9,13 +9,14 @@ public class Conductor {
 	private String nombre;
 	private String apellidos;
 	private String correo;
+	private int telefono;
 	private String categoriaLicencia;
-	private String diaDescanso;
 	private LocalDate vencimientoLicencia;
+	private String diaDescanso;
 	private int estado;
 	
 	public Conductor(int conductorId, String tipoDocumento, int numeroDocumento, String nombre, String apellidos,
-			String correo, String categoriaLicencia, String disDescanso, LocalDate vencimientoLicencia, int estado) {
+			String correo, int telefono, String categoriaLicencia, LocalDate vencimientoLicencia, String diaDescanso, int estado) {
 		super();
 		this.conductorId = conductorId;
 		this.tipoDocumento = tipoDocumento;
@@ -23,20 +24,20 @@ public class Conductor {
 		this.nombre = nombre;
 		this.apellidos = apellidos;
 		this.correo = correo;
+		this.telefono = telefono;
 		this.categoriaLicencia = categoriaLicencia;
-		this.diaDescanso = diaDescanso;
 		this.vencimientoLicencia = vencimientoLicencia;
+		this.diaDescanso = diaDescanso;
 		this.estado = estado;
 	}
 	
 	public Conductor(String tipoDocumento, int numeroDocumento, String nombre, String apellidos,
-			String correo, String categoriaLicencia, String diaDescanso, LocalDate vencimientoLicencia, int estado) {
-		this(0, tipoDocumento, numeroDocumento, nombre, apellidos, correo, categoriaLicencia, diaDescanso,
-				vencimientoLicencia, estado);
+			String correo, int telefono, String categoriaLicencia, LocalDate vencimientoLicencia, String diaDescanso, int estado) {
+		this(0, tipoDocumento, numeroDocumento, nombre, apellidos, correo, telefono, categoriaLicencia, vencimientoLicencia, diaDescanso, estado);
 	}
 	
 	public Conductor() {
-		this("", 0, "", "", "", "", "", null, 0);
+		this("", 0, "", "", "", 0, "", null, "", 0);
 	}
 
 	public int getConductorId() {
@@ -118,5 +119,14 @@ public class Conductor {
 	public void setEstado(int estado) {
 		this.estado = estado;
 	}
+
+	public int getTelefono() {
+		return telefono;
+	}
+
+	public void setTelefono(int telefono) {
+		this.telefono = telefono;
+	}
+	
 	
 }
