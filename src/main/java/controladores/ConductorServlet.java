@@ -40,7 +40,7 @@ public class ConductorServlet extends HttpServlet {
 		switch (opcion) {
 			case "lista": this.lista(request, response); break;
 			case "registrar": this.registrar(request, response); break; // Sirve para CREAR y EDITAR
-			//case "eliminar": this.eliminar(request, response); break;
+			case "eliminar": this.eliminar(request, response); break;
 			default: 
 				this.lista(request, response);
 		}
@@ -59,11 +59,11 @@ public class ConductorServlet extends HttpServlet {
 	
 	protected void registrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			int conductorId = Integer.parseInt(request.getParameter("condctorId")); 
+			int conductorId = Integer.parseInt(request.getParameter("conductorId")); 
 	        String tipoDocumento = request.getParameter("tipoDocumento");
 	        int numDocumento = Integer.parseInt(request.getParameter("numDocumento"));
 	        String nombre = request.getParameter("nombre");
-	        String apellidos = request.getParameter("apellidos");
+	        String apellidos = request.getParameter("Apellidos");
 	        String correo = request.getParameter("correo");
 	        int telefono = Integer.parseInt(request.getParameter("telefono"));
 	        String licencia = request.getParameter("licencia");
@@ -85,6 +85,15 @@ public class ConductorServlet extends HttpServlet {
 	        response.sendRedirect("Conductor?opcion=lista");
 		}
 		
+	}
+	
+	protected void eliminar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		if (request.getParameter("id") != null) {
+			int conductorId = Integer.parseInt(request.getParameter("id"));
+			this.conductorDAO.eliminar(conductorId);
+		}
+		
+		response.sendRedirect("Conductor");
 	}
 
 }

@@ -133,7 +133,7 @@ public class ConductorDAO implements IConductorDAO {
 		PreparedStatement ps = null;
 		try {
 			con = MySQLConexion.getConexion();
-			String sql = "update CONDUCTOR set tipoDocumento=?, NroDocumento=?, Nombre=?, Apellido=?, Correo=?, telefono=?, categoriaLicencia=?, vencimientoLicencia=?, diaDescanso=?, estado=? where curso_id=?";
+			String sql = "update CONDUCTOR set tipoDocumento=?, NroDocumento=?, Nombre=?, Apellido=?, Correo=?, telefono=?, categoriaLicencia=?, vencimientoLicencia=?, diaDescanso=?, estado=? where IdConductor=?";
 			ps = con.prepareStatement(sql);
 			ps.setString(1, conductor.getTipoDocumento());
 			ps.setInt(2, conductor.getNumeroDocumento());
@@ -145,6 +145,7 @@ public class ConductorDAO implements IConductorDAO {
 			ps.setObject(8, conductor.getVencimientoLicencia());
 			ps.setString(9, conductor.getDiaDescanso());
 			ps.setInt(10, conductor.getEstado());
+			ps.setInt(11, conductor.getConductorId());
 			
 			value = ps.executeUpdate();
 		} catch (Exception e) {
