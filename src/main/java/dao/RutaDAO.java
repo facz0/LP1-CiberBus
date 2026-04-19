@@ -31,8 +31,43 @@ public class RutaDAO implements IRutaDAO{
 
 	@Override
 	public ArrayList<Ruta> listar() {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Ruta> lista = new ArrayList<Ruta>();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = MySQLConexion.getConexion();
+			String sql = "SELECT r.IdRuta, r.CiudadPartida, r.CiudadLlegada, r.HorasEstimadas, r.Estado, "
+					   + "cp.Ciudad AS NombrePartida, "
+					   + "cd.Ciudad AS NombreLlegada "
+					   + "FROM RUTA r "
+					   + "INNER JOIN CIUDAD cp ON r.CiudadPartida = cp.IdCiudad "
+					   + "INNER JOIN CIUDAD cd ON r.CiudadLlegada = cd.IdCiudad";
+
+			ps = con.prepareStatement(sql);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Ruta ruta = new Ruta(
+						rs.getInt("IdRuta"),
+						rs.getInt("CiudadPartida"),
+						rs.getInt("CiudadLlegada"),
+						rs.getDouble("HorasEstimadas"),
+						rs.getInt("Estado"),
+						rs.getString("NombrePartida"),
+						rs.getString("NombreLlegada")
+				);
+				lista.add(ruta);
+			}
+
+		} catch (Exception e) {
+			System.out.println("Error al listar todas las rutas: " + e.getMessage());
+		} finally {
+			MySQLConexion.closeConexion(con);
+		}
+
+		return lista;
 	}
 
 	@Override
@@ -94,8 +129,39 @@ public class RutaDAO implements IRutaDAO{
 
 	@Override
 	public ArrayList<Ruta> listarDestinosPorOrigen(int idCiudadOrigen) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Ruta> lista = new ArrayList<Ruta>();
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = MySQLConexion.getConexion();
+			String sql = "SELECT r.IdRuta, r.CiudadLlegada, c.Ciudad AS ciudadDestino "
+					   + "FROM RUTA r "
+					   + "INNER JOIN CIUDAD c ON r.CiudadLlegada = c.IdCiudad "
+					   + "WHERE r.CiudadPartida = ?";
+
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idCiudadOrigen);
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				Ruta ruta = new Ruta(
+						rs.getInt("IdRuta"), 
+						idCiudadOrigen,
+						rs.getInt("CiudadLlegada"),
+						0.0, 0, "",
+						rs.getString("ciudadDestino")
+				);
+				lista.add(ruta);
+			}
+
+		} catch (Exception e) {
+			System.out.println("Error al listar destinos: " + e.getMessage());
+		} finally {
+			MySQLConexion.closeConexion(con);
+		}
+
+		return lista;
 	}
 
 }

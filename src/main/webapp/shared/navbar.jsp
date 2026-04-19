@@ -16,7 +16,7 @@
         <li class="nav-item mx-5"><a class="nav-link fw-bold text-light fs-5 " href="contacto">Contacto</a></li>
       </ul>
 			<div class="ms-auto">
-				<a href="usuario" class="text-light fs-4"> <i
+				<a href="Admin_dashboard" class="text-light fs-4"> <i
 					class="bi bi-person-circle"></i>
 				</a>
 			</div>
