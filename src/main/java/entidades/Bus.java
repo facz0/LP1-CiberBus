@@ -3,14 +3,14 @@ package entidades;
 public class Bus {
 	
 	private int IdBus;
-	private int NroPlaca;
+	private String NroPlaca;
 	private String Marca;
 	private String TipoBus;
 	private int CantidadPisos;
 	private int NroAsientos;
 	private int Estado;
 	
-	public Bus(int idBus, int nroPlaca, String marca, String tipoBus, int cantidadPisos, int nroAsientos, int estado) {
+	public Bus(int idBus, String nroPlaca, String marca, String tipoBus, int cantidadPisos, int nroAsientos, int estado) {
 		super();
 		IdBus = idBus;
 		NroPlaca = nroPlaca;
@@ -21,12 +21,12 @@ public class Bus {
 		Estado = estado;
 	}
 	
-	public Bus(int nroPlaca, String marca, String tipoBus, int cantidadPisos, int nroAsientos, int estado) {
+	public Bus(String nroPlaca, String marca, String tipoBus, int cantidadPisos, int nroAsientos, int estado) {
 		this(0,nroPlaca, marca, tipoBus,cantidadPisos,nroAsientos,estado);
 	}
 	
 	public Bus() {
-		this(0,"","",0,0,0);
+		this("","","",0,0,0);
 	}
 
 	public int getIdBus() {
@@ -37,11 +37,11 @@ public class Bus {
 		IdBus = idBus;
 	}
 
-	public int getNroPlaca() {
+	public String getNroPlaca() {
 		return NroPlaca;
 	}
 
-	public void setNroPlaca(int nroPlaca) {
+	public void setNroPlaca(String nroPlaca) {
 		NroPlaca = nroPlaca;
 	}
 

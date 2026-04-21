@@ -15,15 +15,18 @@
 				<li class="nav-item mb-1"><a class="nav-link active"
 					aria-current="page" href="Admin_dashboard">Página de inicio</a></li>
 				<li class="nav-item mb-1"><hr></li>
-				<li class="nav-item mb-1"><spam class="nav-link active"
-						aria-current="page">Manteniemiento</spam></li>
+				<li class="nav-item mb-1">
+					<spam class="nav-link active" aria-current="page">Manteniemiento</spam>
+				</li>
 				<li class="nav-item mb-1"><hr></li>
+				<li class="nav-item mb-1">
+					<a class="nav-link link-dark" href="Conductor">Conductores</a>
+				</li>
+				<li class="nav-item mb-1">
+					<a class="nav-link link-dark" href="bus">Buses</a>
+				</li>
 				<li class="nav-item mb-1"><a class="nav-link link-dark"
-					href="administrador/Conductor">Conductores</a></li>
-				<li class="nav-item mb-1"><a class="nav-link link-dark"
-					href="#">Buses</a></li>
-				<li class="nav-item mb-1"><a class="nav-link link-dark"
-					href="#">Rutas</a></li>
+					href="ruta">Rutas</a></li>
 				<li class="nav-item mb-1"><a class="nav-link link-dark"
 					href="#">Viajes</a></li>
 				<li class="nav-item mb-1"><a class="nav-link link-dark"

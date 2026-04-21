@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
 
+import java.sql.CallableStatement;
 import db.MySQLConexion;
 import entidades.Ruta;
 import interfaces.IRutaDAO;
@@ -25,8 +26,26 @@ public class RutaDAO implements IRutaDAO{
 	
 	@Override
 	public int crear(Ruta ruta) {
-		// TODO Auto-generated method stub
-		return 0;
+		int value = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = MySQLConexion.getConexion();
+			String sql = "insert into RUTA values (null, ?, ?, ?, ?)";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, ruta.getIdCiudadOrigen());
+			ps.setInt(2, ruta.getIdCiudadDestino());
+			ps.setDouble(3, ruta.getHorasEstimadas());
+			ps.setInt(4, ruta.getEstado());
+			
+			value = ps.executeUpdate();
+		} catch(Exception e) {
+			System.out.println("Error al crear la ruta: " + e.getMessage());
+		} finally {
+			MySQLConexion.closeConexion(con);
+		}
+		
+		return value;
 	}
 
 	@Override
@@ -72,26 +91,122 @@ public class RutaDAO implements IRutaDAO{
 
 	@Override
 	public Ruta obtener(int idRuta) {
-		// TODO Auto-generated method stub
-		return null;
+		Ruta ruta = null;
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+		try {
+			con = MySQLConexion.getConexion();
+			String sql = "SELECT r.IdRuta, r.CiudadPartida, r.CiudadLlegada, r.HorasEstimadas, r.Estado, "
+					   + "cp.Ciudad AS NombrePartida, "
+					   + "cd.Ciudad AS NombreLlegada "
+					   + "FROM RUTA r "
+					   + "INNER JOIN CIUDAD cp ON r.CiudadPartida = cp.IdCiudad "
+					   + "INNER JOIN CIUDAD cd ON r.CiudadLlegada = cd.IdCiudad "
+					   + "WHERE r.IdRuta = ?";
+			
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idRuta); 
+			rs = ps.executeQuery();
+			
+			if(rs.next()) {
+				ruta = new Ruta(
+						rs.getInt("IdRuta"),
+						rs.getInt("CiudadPartida"),
+						rs.getInt("CiudadLlegada"),
+						rs.getDouble("HorasEstimadas"),
+						rs.getInt("Estado"),
+						rs.getString("NombrePartida"),
+						rs.getString("NombreLlegada")
+				);
+			}
+		} catch (Exception e) {
+			System.out.println("Error al obtener la ruta: " + e.getMessage());
+		} finally {
+			MySQLConexion.closeConexion(con);
+		}
+		return ruta;
 	}
 
 	@Override
 	public int actualizar(Ruta ruta) {
-		// TODO Auto-generated method stub
-		return 0;
+		int value = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = MySQLConexion.getConexion();
+			String sql = "update RUTA set CiudadPartida=?, CiudadLlegada=?, HorasEstimadas=?, Estado=? where IdRuta=?";
+			ps = con.prepareStatement(sql);
+			
+			ps.setInt(1, ruta.getIdCiudadOrigen());
+			ps.setInt(2, ruta.getIdCiudadDestino());
+			ps.setDouble(3, ruta.getHorasEstimadas());
+			ps.setInt(4, ruta.getEstado());
+			ps.setInt(5, ruta.getIdRuta()); // El ID siempre va al final en el WHERE
+			
+			value = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("Error al actualizar la ruta: " + e.getMessage());
+		} finally {
+			MySQLConexion.closeConexion(con);
+		}
+		return value;
 	}
 
 	@Override 
 	public int eliminar(int idRuta) {
-		// TODO Auto-generated method stub
-		return 0;
+		int value = 0;
+		Connection con = null;
+		PreparedStatement ps = null;
+		try {
+			con = MySQLConexion.getConexion();
+			String sql = "delete from RUTA where IdRuta = ?";
+			ps = con.prepareStatement(sql);
+			ps.setInt(1, idRuta);
+			
+			value = ps.executeUpdate();
+		} catch (Exception e) {
+			System.out.println("Error al eliminar la ruta: " + e.getMessage());
+		} finally {
+			MySQLConexion.closeConexion(con);
+		}
+		return value;
 	}
 
 	@Override
 	public ArrayList<Ruta> buscar(String texto) {
-		// TODO Auto-generated method stub
-		return null;
+		ArrayList<Ruta> lista = new ArrayList<Ruta>();
+		Connection con = null;
+		CallableStatement cs = null;
+		ResultSet rs = null;
+		try {
+			con = MySQLConexion.getConexion();
+			String sql = "{CALL usp_buscar_ciudad_ruta(?)}";
+			cs = con.prepareCall(sql);
+			cs.setString(1, texto);
+			
+			rs = cs.executeQuery();
+			
+			while(rs.next()) {
+				Ruta ruta = new Ruta(
+						rs.getInt("IdRuta"),
+						rs.getInt("CiudadPartida"),
+						rs.getInt("CiudadLlegada"),
+						rs.getDouble("HorasEstimadas"),
+						rs.getInt("Estado"),
+						rs.getString("NombrePartida"),
+						rs.getString("NombreLlegada")   
+						);
+				
+				lista.add(ruta);
+			}
+			
+		} catch (Exception e) {
+			System.out.println("Error al buscar la ruta: " + e.getMessage());
+		} finally {
+			MySQLConexion.closeConexion(con);
+		}
+		return lista;
 	}
 
 	@Override

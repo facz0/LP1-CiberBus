@@ -23,7 +23,7 @@
 			
 				<div class="text_center mb-5 mt-3">
 					<h1 class="fw-bold">Página de mantenimiento de Conductores</h1>
-				</div>
+				</div> 
 
 				<%
 				ArrayList<Conductor> lista = (ArrayList<Conductor>) request.getAttribute("lista");
@@ -73,7 +73,7 @@
 									<% } else { %>
 										<span class="badge text-bg-danger" >Deshabilitado</span>
 									<% } %>
-									</td>
+								</td>
 								<td>
 									<div class="btn-group">
 										<a href="#" class="btn btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#modalConductor" 

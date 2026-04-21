@@ -69,7 +69,7 @@
 							<div class="card-body">
 								<h5 class="card-title">Tabla de buses</h5>
 								<p class="card-text">Apartado para registrar, editar, visualizar y eliminar buses.</p>
-								<a href="#" class="btn btn-primary">Ir a Buses</a>
+								<a href="bus" class="btn btn-primary">Ir a Buses</a>
 							</div>
 						</div>
 					</div>
@@ -80,7 +80,7 @@
 							<div class="card-body">
 								<h5 class="card-title">Tabla de rutas</h5>
 								<p class="card-text">Apartado para registrar, editar, visualizar y eliminar Rutas.</p>
-								<a href="#" class="btn btn-primary">Ir a Rutas</a>
+								<a href="ruta" class="btn btn-primary">Ir a Rutas</a>
 							</div>
 						</div>
 					</div>
