@@ -25,10 +25,12 @@
 				<li class="nav-item mb-1">
 					<a class="nav-link link-dark" href="bus">Buses</a>
 				</li>
-				<li class="nav-item mb-1"><a class="nav-link link-dark"
-					href="ruta">Rutas</a></li>
-				<li class="nav-item mb-1"><a class="nav-link link-dark"
-					href="#">Viajes</a></li>
+				<li class="nav-item mb-1">
+					<a class="nav-link link-dark" href="ruta">Rutas</a>
+				</li>
+				<li class="nav-item mb-1">
+					<a class="nav-link link-dark" href="ViajeMant">Viajes</a>
+				</li>
 				<li class="nav-item mb-1"><a class="nav-link link-dark"
 					href="#">Reservas</a></li>
 				<li class="nav-item mb-1"><a class="nav-link link-dark"

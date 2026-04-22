@@ -35,7 +35,11 @@ public class ReservaServlet extends HttpServlet {
 		if (request.getParameter("opcion") != null) opcion = request.getParameter("opcion");
 		
 		switch (opcion) {
+		case "pagar" :
+			this.pagarReserva(request, response);
+			break;
         default:
+        	
            this.listarPasajeros(request, response);
      }
 	}
@@ -63,5 +67,13 @@ public class ReservaServlet extends HttpServlet {
 	       
 	       request.getRequestDispatcher("/ventas/reserva.jsp").forward(request, response);
 	    }
+	
+	protected void pagarReserva(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		
+		
+	}
 
 }
+
+

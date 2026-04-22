@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 import dao.RutaDAO;
+import dao.CiudadDAO;
 import entidades.Ruta;
 import interfaces.IRutaDAO;
 
@@ -54,18 +55,20 @@ public class RutaServlet extends HttpServlet {
 		
 		ArrayList<Ruta> lista = this.rutaDAO.buscar(texto);
 		request.setAttribute("lista", lista);
+		request.setAttribute("listaCiudades", dao.CiudadDAO.getInstancia().listar());
 		request.getRequestDispatcher("/administrador/ruta_mant.jsp").forward(request, response);
 	}
 	
 	protected void registrar(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		try {
-			int idRuta = Integer.parseInt(request.getParameter("idRuta")); 
+			int idRuta = Integer.parseInt(request.getParameter("idRuta"));
+			String codigoRuta = request.getParameter("codigoRuta");
 	        int idCiudadOrigen = Integer.parseInt(request.getParameter("idCiudadOrigen"));
 	        int idCiudadDestino = Integer.parseInt(request.getParameter("idCiudadDestino"));
 	        double horasEstimadas = Double.parseDouble(request.getParameter("horasEstimadas"));
 	        int estado = Integer.parseInt(request.getParameter("estado"));
 	        
-	        Ruta ruta = new Ruta(idRuta, idCiudadOrigen, idCiudadDestino, horasEstimadas, estado, "", "");
+	        Ruta ruta = new Ruta(idRuta, codigoRuta, idCiudadOrigen, idCiudadDestino, horasEstimadas, estado, "", "");
 	        
 	        if(ruta.getIdRuta() == 0) {
 	        	this.rutaDAO.crear(ruta);

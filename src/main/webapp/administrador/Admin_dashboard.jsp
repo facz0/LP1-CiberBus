@@ -91,7 +91,7 @@
 							<div class="card-body">
 								<h5 class="card-title">Tabla de viajes</h5>
 								<p class="card-text">Apartado para registrar, editar, visualizar y eliminar Viajes.</p>
-								<a href="#" class="btn btn-primary">Ir a Viajes</a>
+								<a href="ViajeMant" class="btn btn-primary">Ir a Viajes</a>
 							</div>
 						</div>
 					</div>

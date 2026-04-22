@@ -3,6 +3,7 @@ package entidades;
 public class Ruta {
 	
 	private int idRuta;
+	private String codigoRuta;
     private int idCiudadOrigen;
     private int idCiudadDestino;
     private double horasEstimadas;
@@ -10,9 +11,10 @@ public class Ruta {
     private String ciudadOrigen;
     private String ciudadDestino;
     
-    public Ruta(int idRuta, int idCiudadOrigen, int idCiudadDestino, double horasEstimadas, int estado, 
+    public Ruta(int idRuta, String codigoRuta, int idCiudadOrigen, int idCiudadDestino, double horasEstimadas, int estado, 
 			String ciudadOrigen, String ciudadDestino) {
 		this.idRuta = idRuta;
+		this.codigoRuta = codigoRuta;
 		this.idCiudadOrigen = idCiudadOrigen;
 		this.idCiudadDestino = idCiudadDestino;
 		this.horasEstimadas = horasEstimadas;
@@ -21,13 +23,13 @@ public class Ruta {
 		this.ciudadDestino = ciudadDestino;
 	}
 
-	public Ruta(int idCiudadOrigen, int idCiudadDestino, double horasEstimadas, int estado, 
+	public Ruta(String codigoRuta, int idCiudadOrigen, int idCiudadDestino, double horasEstimadas, int estado, 
 			String ciudadOrigen, String ciudadDestino) {
-		this(0, idCiudadOrigen, idCiudadDestino, horasEstimadas, estado, ciudadOrigen, ciudadDestino);
+		this(0, codigoRuta, idCiudadOrigen, idCiudadDestino, horasEstimadas, estado, ciudadOrigen, ciudadDestino);
 	}
 
 	public Ruta() {
-		this(0, 0, 0.0, 0, "", "");
+		this("", 0, 0, 0.0, 0, "", "");
 	}
 
 	public int getIdRuta() {
@@ -85,7 +87,13 @@ public class Ruta {
 	public void setCiudadDestino(String ciudadDestino) {
 		this.ciudadDestino = ciudadDestino;
 	}
-    
-	
+
+	public String getCodigoRuta() {
+		return codigoRuta;
+	}
+
+	public void setCodigoRuta(String codigoRuta) {
+		this.codigoRuta = codigoRuta;
+	}
 	
 }

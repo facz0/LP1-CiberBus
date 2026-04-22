@@ -1,4 +1,5 @@
 <%@page import="entidades.Ruta"%>
+<%@page import="entidades.Ciudad"%>
 <%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
@@ -50,6 +51,7 @@
 				<table class="table table-striped table-sm mt-3" >
 
 					<thead>
+						<th>Código</th>
 						<th>Origen</th>
 						<th>Destino</th>
 						<th>Horas Estimadas</th>
@@ -61,6 +63,7 @@
 						<% if(lista != null) { 
 							for (Ruta r : lista) { %>
 							<tr>
+								<td><%= r.getCodigoRuta() %></td>
 								<td><%= r.getCiudadOrigen() %></td>
 								<td><%= r.getCiudadDestino() %></td>
 								<td><%= r.getHorasEstimadas() %> hrs</td>
@@ -74,7 +77,8 @@
 								<td>
 									<div class="btn-group">
 										<a href="#" class="btn btn-sm btn-primary"  data-bs-toggle="modal" data-bs-target="#modalRuta" 
-   											onclick="actualizar(<%=r.getIdRuta()%>, 
+   											onclick="actualizar(<%=r.getIdRuta()%>,
+   													'<%= r.getCodigoRuta() %>', 
    													<%= r.getIdCiudadOrigen() %>,
    													<%= r.getIdCiudadDestino() %>,
    													<%= r.getHorasEstimadas() %>,
@@ -116,24 +120,39 @@
 						<input type="hidden" id="idRuta" name="idRuta" value="0">
 
 						<div class="row">
+							<div class="mb-3">
+    							<label class="form-label fw-bold">Código de Ruta</label> 
+    							<input type="text" class="form-control" id="codigoRuta" name="codigoRuta" required placeholder="Ej: LIM-AQP">
+							</div>							
 							<div class="col-md-6 mb-3">
 								<label class="form-label fw-bold">Ciudad Origen</label> 
 								<select class="form-select" id="idCiudadOrigen" name="idCiudadOrigen" required>
 									<option value="">Seleccione un origen...</option>
-									<option value="1">Lima</option>
-									<option value="2">Arequipa</option>
-									<option value="3">Cusco</option>
-									<option value="4">Piura</option>
+									<% 
+										ArrayList<Ciudad> ciudades = (ArrayList<Ciudad>) request.getAttribute("listaCiudades");
+										if(ciudades != null) {
+											for(Ciudad c : ciudades) { 
+									%>
+									<option value="<%= c.getIdCiudad() %>"><%= c.getCiudad() %></option>
+									<% 
+										} 
+									} 
+									%>
 								</select>
 							</div>
 							<div class="col-md-6 mb-3">
 								<label class="form-label fw-bold">Ciudad Destino</label> 
 								<select class="form-select" id="idCiudadDestino" name="idCiudadDestino" required>
 									<option value="">Seleccione un destino...</option>
-									<option value="1">Lima</option>
-									<option value="2">Arequipa</option>
-									<option value="3">Cusco</option>
-									<option value="4">Piura</option>
+									<% 
+										if(ciudades != null) {
+											for(Ciudad c : ciudades) { 
+										%>
+											<option value="<%= c.getIdCiudad() %>"><%= c.getCiudad() %></option>
+										<% 
+											} 
+										} 
+									%>
 								</select>
 							</div>
 						</div>
@@ -178,6 +197,7 @@
 		
 		const crear = () => {
 			document.querySelector('#modalRuta .modal-title').innerText = 'Registrar Nueva Ruta';
+			document.querySelector('#codigoRuta').value = '';
 			document.querySelector('#idRuta').value = 0;
 			document.querySelector('#idCiudadOrigen').value = ''; 
 			document.querySelector('#idCiudadDestino').value = '';
@@ -185,9 +205,10 @@
 			document.querySelector('#estado').value = '1'; 
 		};
 
-		const actualizar = (id, origen, destino, horas, estado) => {
+		const actualizar = (id, codigo, origen, destino, horas, estado) => {
 			document.querySelector('#modalRuta .modal-title').innerText = 'Editar Ruta';
 			document.querySelector('#idRuta').value = id;
+			document.querySelector('#codigoRuta').value = codigo;
 			document.querySelector('#idCiudadOrigen').value = origen;
 			document.querySelector('#idCiudadDestino').value = destino;
 			document.querySelector('#horasEstimadas').value = horas;

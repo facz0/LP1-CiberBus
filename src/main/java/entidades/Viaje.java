@@ -8,6 +8,7 @@ public class Viaje {
 	private int idViaje;
 	private String codigoViaje;
 	private int idRuta;
+	private String codigoRuta;
 	private int idBus;
 	private int idConductor;
 	private int idCopiloto;
@@ -20,13 +21,16 @@ public class Viaje {
 	private String tipoBus;
 	private int nroAsientos;
 	private String nombreConductor;
-	private String nombreRuta;
+	private String ciudadOrigen;
+	private String ciudadDestino;
 
-	public Viaje(int idViaje, String codigoViaje, int idRuta, int idBus, int idConductor, int idCopiloto, LocalDate fechaSalida, LocalTime horaSalida, LocalDate fechaLlegada, LocalTime horaLlegada, double tarifa,
-			int estado, String tipoBus, int nroAsientos, String nombreConductor, String nombreRuta) {
+	public Viaje(int idViaje, String codigoViaje, int idRuta, String codigoRuta, int idBus, int idConductor, int idCopiloto, 
+			LocalDate fechaSalida, LocalTime horaSalida, LocalDate fechaLlegada, LocalTime horaLlegada, double tarifa,
+			int estado, String tipoBus, int nroAsientos, String nombreConductor, String ciudadOrigen, String ciudadDestino) {
 		this.idViaje = idViaje;
 		this.codigoViaje = codigoViaje;
 		this.idRuta = idRuta;
+		this.codigoRuta = codigoRuta;
 		this.idBus = idBus;
 		this.idConductor = idConductor;
 		this.idCopiloto = idCopiloto;
@@ -39,17 +43,19 @@ public class Viaje {
 		this.tipoBus = tipoBus;
 		this.nroAsientos = nroAsientos;
 		this.nombreConductor = nombreConductor;
-		this.nombreRuta = nombreRuta;
+		this.ciudadOrigen = ciudadOrigen;
+		this.ciudadDestino = ciudadDestino;
 	}
 
-	public Viaje(String codigoViaje, int idRuta, int idBus, int idConductor, int idCopiloto, LocalDate fechaSalida, LocalTime horaSalida, LocalDate fechaLlegada, LocalTime horaLlegada, double tarifa, int estado,
-			String tipoBus, int nroAsientos, String nombreConductor, String nombreRuta) {
-		this(0, codigoViaje, idRuta, idBus, idConductor, idCopiloto, fechaSalida, horaSalida, fechaLlegada, horaLlegada,
-				tarifa, estado, tipoBus, nroAsientos, nombreConductor, nombreRuta);
+	public Viaje(String codigoViaje, int idRuta, String codigoRuta, int idBus, int idConductor, int idCopiloto, 
+			LocalDate fechaSalida, LocalTime horaSalida, LocalDate fechaLlegada, LocalTime horaLlegada, double tarifa, int estado,
+			String tipoBus, int nroAsientos, String nombreConductor, String ciudadOrigen, String ciudadDestino) {
+		this(0, codigoViaje, idRuta, codigoRuta, idBus, idConductor, idCopiloto, fechaSalida, horaSalida, fechaLlegada, horaLlegada,
+				tarifa, estado, tipoBus, nroAsientos, nombreConductor, ciudadOrigen, ciudadDestino);
 	}
 
 	public Viaje() {
-		this("", 0, 0, 0, 0, null, null, null, null, 0.0, 0, "", 0, "", "");
+		this("", 0, "", 0, 0, 0, null, null, null, null, 0.0, 0, "", 0, "", "", "");
 	}
 
 	public int getIdViaje() {
@@ -74,6 +80,14 @@ public class Viaje {
 
 	public void setIdRuta(int idRuta) {
 		this.idRuta = idRuta;
+	}
+
+	public String getCodigoRuta() {
+		return codigoRuta;
+	}
+
+	public void setCodigoRuta(String codigoRuta) {
+		this.codigoRuta = codigoRuta;
 	}
 
 	public int getIdBus() {
@@ -172,13 +186,21 @@ public class Viaje {
 		this.nombreConductor = nombreConductor;
 	}
 
-	public String getNombreRuta() {
-		return nombreRuta;
+	public String getCiudadOrigen() {
+		return ciudadOrigen;
 	}
 
-	public void setNombreRuta(String nombreRuta) {
-		this.nombreRuta = nombreRuta;
+	public void setCiudadOrigen(String ciudadOrigen) {
+		this.ciudadOrigen = ciudadOrigen;
 	}
-	
+
+	public String getCiudadDestino() {
+		return ciudadDestino;
+	}
+
+	public void setCiudadDestino(String ciudadDestino) {
+		this.ciudadDestino = ciudadDestino;
+	}
+
 	
 }

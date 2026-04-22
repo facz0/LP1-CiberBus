@@ -31,12 +31,13 @@ public class RutaDAO implements IRutaDAO{
 		PreparedStatement ps = null;
 		try {
 			con = MySQLConexion.getConexion();
-			String sql = "insert into RUTA values (null, ?, ?, ?, ?)";
+			String sql = "insert into RUTA values (null, ?, ?, ?, ?, ?)";
 			ps = con.prepareStatement(sql);
-			ps.setInt(1, ruta.getIdCiudadOrigen());
-			ps.setInt(2, ruta.getIdCiudadDestino());
-			ps.setDouble(3, ruta.getHorasEstimadas());
-			ps.setInt(4, ruta.getEstado());
+			ps.setString(1, ruta.getCodigoRuta());
+			ps.setInt(2, ruta.getIdCiudadOrigen());
+			ps.setInt(3, ruta.getIdCiudadDestino());
+			ps.setDouble(4, ruta.getHorasEstimadas());
+			ps.setInt(5, ruta.getEstado());
 			
 			value = ps.executeUpdate();
 		} catch(Exception e) {
@@ -57,7 +58,7 @@ public class RutaDAO implements IRutaDAO{
 
 		try {
 			con = MySQLConexion.getConexion();
-			String sql = "SELECT r.IdRuta, r.CiudadPartida, r.CiudadLlegada, r.HorasEstimadas, r.Estado, "
+			String sql = "SELECT r.IdRuta, r.codigo_ruta, r.CiudadPartida, r.CiudadLlegada, r.HorasEstimadas, r.Estado, "
 					   + "cp.Ciudad AS NombrePartida, "
 					   + "cd.Ciudad AS NombreLlegada "
 					   + "FROM RUTA r "
@@ -70,6 +71,7 @@ public class RutaDAO implements IRutaDAO{
 			while (rs.next()) {
 				Ruta ruta = new Ruta(
 						rs.getInt("IdRuta"),
+						rs.getString("codigo_ruta"),
 						rs.getInt("CiudadPartida"),
 						rs.getInt("CiudadLlegada"),
 						rs.getDouble("HorasEstimadas"),
@@ -97,7 +99,7 @@ public class RutaDAO implements IRutaDAO{
 		ResultSet rs = null;
 		try {
 			con = MySQLConexion.getConexion();
-			String sql = "SELECT r.IdRuta, r.CiudadPartida, r.CiudadLlegada, r.HorasEstimadas, r.Estado, "
+			String sql = "SELECT r.IdRuta, r.codigo_ruta, r.CiudadPartida, r.CiudadLlegada, r.HorasEstimadas, r.Estado, "
 					   + "cp.Ciudad AS NombrePartida, "
 					   + "cd.Ciudad AS NombreLlegada "
 					   + "FROM RUTA r "
@@ -112,6 +114,7 @@ public class RutaDAO implements IRutaDAO{
 			if(rs.next()) {
 				ruta = new Ruta(
 						rs.getInt("IdRuta"),
+						rs.getString("codigo_ruta"),
 						rs.getInt("CiudadPartida"),
 						rs.getInt("CiudadLlegada"),
 						rs.getDouble("HorasEstimadas"),
@@ -135,14 +138,15 @@ public class RutaDAO implements IRutaDAO{
 		PreparedStatement ps = null;
 		try {
 			con = MySQLConexion.getConexion();
-			String sql = "update RUTA set CiudadPartida=?, CiudadLlegada=?, HorasEstimadas=?, Estado=? where IdRuta=?";
+			String sql = "update RUTA set CodigoRuta=?, CiudadPartida=?, CiudadLlegada=?, HorasEstimadas=?, Estado=? where IdRuta=?";
 			ps = con.prepareStatement(sql);
 			
-			ps.setInt(1, ruta.getIdCiudadOrigen());
-			ps.setInt(2, ruta.getIdCiudadDestino());
-			ps.setDouble(3, ruta.getHorasEstimadas());
-			ps.setInt(4, ruta.getEstado());
-			ps.setInt(5, ruta.getIdRuta()); // El ID siempre va al final en el WHERE
+			ps.setString(1, ruta.getCodigoRuta());
+			ps.setInt(2, ruta.getIdCiudadOrigen());
+			ps.setInt(3, ruta.getIdCiudadDestino());
+			ps.setDouble(4, ruta.getHorasEstimadas());
+			ps.setInt(5, ruta.getEstado());
+			ps.setInt(6, ruta.getIdRuta());
 			
 			value = ps.executeUpdate();
 		} catch (Exception e) {
@@ -190,6 +194,7 @@ public class RutaDAO implements IRutaDAO{
 			while(rs.next()) {
 				Ruta ruta = new Ruta(
 						rs.getInt("IdRuta"),
+						rs.getString("codigo_ruta"),
 						rs.getInt("CiudadPartida"),
 						rs.getInt("CiudadLlegada"),
 						rs.getDouble("HorasEstimadas"),
@@ -226,7 +231,7 @@ public class RutaDAO implements IRutaDAO{
 			rs = ps.executeQuery();
 
 			while (rs.next()) {
-				Ruta ruta = new Ruta(0,
+				Ruta ruta = new Ruta(0,"",
 						rs.getInt("CiudadPartida"), 0, 0.0, 0,
 						rs.getString("ciudadOrigen"), ""
 				);
@@ -250,7 +255,7 @@ public class RutaDAO implements IRutaDAO{
 		ResultSet rs = null;
 		try {
 			con = MySQLConexion.getConexion();
-			String sql = "SELECT r.IdRuta, r.CiudadLlegada, c.Ciudad AS ciudadDestino "
+			String sql = "SELECT r.IdRuta, r.codigo_ruta, r.CiudadLlegada, c.Ciudad AS ciudadDestino "
 					   + "FROM RUTA r "
 					   + "INNER JOIN CIUDAD c ON r.CiudadLlegada = c.IdCiudad "
 					   + "WHERE r.CiudadPartida = ?";
@@ -262,6 +267,7 @@ public class RutaDAO implements IRutaDAO{
 			while (rs.next()) {
 				Ruta ruta = new Ruta(
 						rs.getInt("IdRuta"), 
+						rs.getString("codigo_ruta"),
 						idCiudadOrigen,
 						rs.getInt("CiudadLlegada"),
 						0.0, 0, "",
