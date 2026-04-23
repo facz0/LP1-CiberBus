@@ -40,7 +40,7 @@ public class ViajeServlet extends HttpServlet {
            break;
         default:
            this.listarViajes(request, response);
-     }
+		}
 	}
 	
 	protected void listarAsientos(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

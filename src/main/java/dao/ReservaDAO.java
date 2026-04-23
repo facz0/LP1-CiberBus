@@ -19,7 +19,11 @@ public class ReservaDAO implements IReservaDAO{
 			con = MySQLConexion.getConexion();
 			String sql = "INSERT INTO reserva VALUES (null, ?, ?, ?, NOW(), ?, ?, ?)";
 			ps = con.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS);
-			ps.setInt(1, r.getIdUsuario());
+			if(r.getIdUsuario() > 0) {
+				ps.setInt(1, r.getIdUsuario());
+			} else {
+				ps.setNull(1, java.sql.Types.INTEGER);
+			}
 			ps.setInt(2, r.getIdViaje());
 			ps.setString(3, r.getCodigoReserva());
 			ps.setDouble(4, r.getMontoTotal());

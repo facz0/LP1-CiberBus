@@ -26,7 +26,7 @@ public class PasajeroDAO implements IPasajeroDAO{
 				id = rs.getInt("IdPasajero");
 			}
 		} catch (Exception e) {
-			System.out.println("Error buscarIdPorDocumento: " + e.getMessage());
+			System.out.println("Error buscar Id Por Documento: " + e.getMessage());
 		} finally {
 			try {
 				if (rs != null) rs.close();

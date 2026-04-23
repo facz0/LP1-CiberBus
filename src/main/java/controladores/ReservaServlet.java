@@ -100,7 +100,7 @@ public class ReservaServlet extends HttpServlet {
 		
 		// 1. Registrar cabecera de reserva
 		Reserva reserva = new Reserva();
-		reserva.setIdUsuario(1); //Luego debe venir de la sesión del usuario
+		reserva.setIdUsuario(0); //Luego debe venir de la sesión del usuario
 		reserva.setIdViaje(idViaje);
 		reserva.setCodigoReserva(generarCodigoReserva());
 		reserva.setMontoTotal(totalPagar);
@@ -161,13 +161,24 @@ public class ReservaServlet extends HttpServlet {
 			detalle.setPrecioPagado(totalPagar / cantidadSeleccionados);
 
 			detalleReservaDAO.crear(detalle);
-	
 		}
+		
+		Viaje viaje = viajeDAO.obtener(idViaje);
+		
+			request.setAttribute("viaje", viaje);
+			request.setAttribute("codigoReserva", reserva.getCodigoReserva());
+			request.setAttribute("cantidadSeleccionados", cantidadSeleccionados);
+			request.setAttribute("totalPagar", totalPagar);
+			request.setAttribute("asientosSeleccionados", asientosSeleccionados);
+			request.setAttribute("listaPasajeros", listaPasajeros);
+			request.getRequestDispatcher("/ventas/resumen.jsp").forward(request, response);
 	}
 	
+	//cambio de codigo de reserva, se implementa un número aleatoreo para no
+	//superar los 10 digitos limites del codigo en base de datos
 	private String generarCodigoReserva() {
-		long tiempo = System.currentTimeMillis();
-		return "RSV" + tiempo;
+		int random = (int)(Math.random()* 90000) + 10000;
+		return "RSV" + random; 
 	}
 
 }
