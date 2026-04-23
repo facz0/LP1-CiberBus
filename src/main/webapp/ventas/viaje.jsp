@@ -8,6 +8,7 @@
 <title>Listado de Viajes - CiberBus</title>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="css/viaje.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
@@ -17,7 +18,7 @@
     <main class="flex-grow-1">
         <div class="container mt-5 mb-5">
         
-           <h2 class="fw-bold mb-4" style="color: #4f699c;">Viajes disponibles</h2>
+           <h2 class="viaje fw-bold mb-4">Viajes disponibles</h2>
            
            <%
               List<Viaje> listaViajes = (List<Viaje>) request.getAttribute("listaViajes");

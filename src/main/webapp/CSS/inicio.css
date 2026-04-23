@@ -15,7 +15,6 @@
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
 }
 
-/* tarjetas de destinos */
 .card-img-top {
     height: 200px;
     object-fit: cover;
@@ -24,4 +23,17 @@
 .destino-label {
     color: #6c757d;
     font-size: 0.9rem;
+}
+
+.boton-pasaje {
+	color: #4f699c;
+}
+
+.titulo-destinos {
+	color: #4f699c;
+}
+
+.boton-destino {
+  background-color: #4f699c;
+
 }
