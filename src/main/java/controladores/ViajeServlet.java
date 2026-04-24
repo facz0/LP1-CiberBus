@@ -7,10 +7,13 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
+import dao.ViajeAsientoDAO;
 import dao.ViajeDAO;
 import entidades.Viaje;
 import interfaces.IViajeDAO;
+import interfaces.IViajeAsientoDAO;
 /**
  * Servlet implementation class ViajeServlet
  */
@@ -51,7 +54,11 @@ public class ViajeServlet extends HttpServlet {
 
 	       Viaje viaje = this.viajeDAO.obtener(idViaje);
 	       
+	       IViajeAsientoDAO viajeAsientoDAO = new ViajeAsientoDAO();
+	       List<Integer> asientosVendidos = viajeAsientoDAO.obtenerAsientosVendidos(idViaje); 
+	       
 	       request.setAttribute("viaje", viaje);
+	       request.setAttribute("asientosVendidos", asientosVendidos);
 	       request.getRequestDispatcher("/ventas/asiento.jsp").forward(request, response);
 	}
 	
