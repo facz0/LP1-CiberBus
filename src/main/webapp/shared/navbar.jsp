@@ -15,7 +15,7 @@
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.min.css">
 
 
-<link rel="stylesheet" href="css/nav.css">
+<link rel="stylesheet" href="CSS/nav.css">
 </head>
 
 <body >
@@ -51,7 +51,7 @@
 				</ul>
 
 				<div class="d-flex justify-content-center mt-3 mt-lg-0">
-					<a href="iniciar_seccion" class="btn-profile text-light"> <i
+					<a href="seccion" class="btn-profile text-light"> <i
 						class="bi bi-person-circle fs-4"></i>
 					</a>
 				</div>
