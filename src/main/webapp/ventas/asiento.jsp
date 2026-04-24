@@ -1,4 +1,4 @@
-<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Viaje"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -32,7 +32,7 @@
         
            <%
               Viaje viaje = (Viaje) request.getAttribute("viaje");
-              List<Integer> asientosVendidos = (List<Integer>) request.getAttribute("asientosVendidos");
+           ArrayList<Integer> asientosVendidos = (ArrayList<Integer>) request.getAttribute("asientosVendidos");
               
               if(asientosVendidos == null){
                  asientosVendidos = new java.util.ArrayList<Integer>();
@@ -191,15 +191,21 @@
                 seleccionados.splice(index, 1);
              }
           }else{
-             this.classList.remove('btn-outline-primary');
-             this.classList.add('btn-primary');
-             this.classList.add('text-white');
-             
-             seleccionados.push({
-                numero: numero,
-                precio: precio
-             });
-          }
+        	   // 🚫 VALIDACIÓN: máximo 5 asientos
+        	   if(seleccionados.length >= 5){
+        	      alert('Solo puede seleccionar un máximo de 5 asientos.');
+        	      return;
+        	   }
+
+        	   this.classList.remove('btn-outline-primary');
+        	   this.classList.add('btn-primary');
+        	   this.classList.add('text-white');
+        	   
+        	   seleccionados.push({
+        	      numero: numero,
+        	      precio: precio
+        	   });
+        	}
           
           actualizarResumen();
        });
@@ -218,12 +224,18 @@
        document.getElementById('totalPagar').value = total.toFixed(2);
     }
     
-    document.getElementById('formAsientos').addEventListener('submit', function(e){
-       if(seleccionados.length === 0){
-          e.preventDefault();
-          alert('Debe seleccionar al menos un asiento para continuar con la compra.');
-       }
-    });
+    	document.getElementById('formAsientos').addEventListener('submit', function(e){
+    	   if(seleccionados.length === 0){
+    	      e.preventDefault();
+    	      alert('Debe seleccionar al menos un asiento para continuar con la compra.');
+    	      return;
+    	   }
+
+    	   if(seleccionados.length > 5){
+    	      e.preventDefault();
+    	      alert('No puede seleccionar más de 5 asientos.');
+    	   }
+    	});
 </script>
 
 </body>

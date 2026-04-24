@@ -1,4 +1,4 @@
-<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Ruta"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -15,8 +15,8 @@
     <%@ include file="/shared/navbar.jsp"%>
 
     <%
-        List<Ruta> listaOrigen = (List<Ruta>) request.getAttribute("listaOrigen");
-        List<Ruta> listaDestino = (List<Ruta>) request.getAttribute("listaDestino");
+    	ArrayList<Ruta> listaOrigen = (ArrayList<Ruta>) request.getAttribute("listaOrigen");
+    	ArrayList<Ruta> listaDestino = (ArrayList<Ruta>) request.getAttribute("listaDestino");
         
         int ciudadOrigenId = 0;
         int rutaId = 0;

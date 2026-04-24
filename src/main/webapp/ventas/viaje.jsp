@@ -1,4 +1,4 @@
-<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Viaje"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
@@ -20,7 +20,7 @@
            <h2 class="fw-bold mb-4" style="color: #4f699c;">Viajes disponibles</h2>
            
            <%
-              List<Viaje> listaViajes = (List<Viaje>) request.getAttribute("listaViajes");
+           ArrayList<Viaje> listaViajes = (ArrayList<Viaje>) request.getAttribute("listaViajes");
            %>
            
            <%
