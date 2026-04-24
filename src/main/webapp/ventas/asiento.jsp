@@ -9,18 +9,7 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 <link rel="stylesheet" href="css/inicio.css">
-<style>
-    .asiento-btn {
-       width: 70px;
-       height: 50px;
-       font-weight: bold;
-       border-radius: 10px;
-       transition: all 0.2s ease-in-out;
-    }
-    .asiento-btn:hover:not(:disabled) {
-        transform: scale(1.05);
-    }
-</style>
+<link rel="stylesheet" href="css/asiento.css">
 </head>
 
 <body class="d-flex flex-column min-vh-100">
