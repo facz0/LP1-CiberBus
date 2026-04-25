@@ -3,8 +3,8 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import controladores.DetalleReserva;
 import db.MySQLConexion;
+import entidades.DetalleReserva;
 import interfaces.IDetalleReservaDAO;
 
 public class DetalleReservaDAO implements IDetalleReservaDAO{

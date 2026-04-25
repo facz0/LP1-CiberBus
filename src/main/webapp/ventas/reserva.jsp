@@ -1,4 +1,5 @@
 <%@page import="entidades.Viaje"%>
+<%@page import="java.util.ArrayList"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
@@ -42,6 +43,25 @@
            %>
            
            <h2 class="fw-bold mb-4" style="color: #4f699c;">Detalles de los pasajeros</h2>
+           <%
+			   ArrayList<String> errores = (ArrayList<String>) request.getAttribute("errores");
+			   if (errores != null && !errores.isEmpty()) {
+			%>
+			   <div class="alert alert-danger shadow-sm rounded-4 border-0">
+			      <h6 class="fw-bold mb-2">Se encontraron errores:</h6>
+			      <ul class="mb-0">
+			         <%
+			            for (String error : errores) {
+			         %>
+			            <li><%= error %></li>
+			         <%
+			            }
+			         %>
+			      </ul>
+			   </div>
+			<%
+			   }
+			%>
            
            <%
               if(viaje == null){
@@ -100,19 +120,23 @@
                              </div>
                              <div class="col-md-4">
                                 <label class="form-label text-secondary small fw-bold">N° Documento</label>
-                                <input type="number" class="form-control" name="nroDocumento_<%= i %>" required>
+                                <input type="text" class="form-control" name="nroDocumento_<%= i %>" required maxlength="12">
                                 <div class="invalid-feedback">Ingrese un documento válido.</div>
                              </div>
                              <div class="col-md-5">
                                 <label class="form-label text-secondary small fw-bold">Nombres completos</label>
-                                <input type="text" class="form-control" name="nombre_<%= i %>" required>
+                                <input type="text" class="form-control" name="nombre_<%= i %>" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,100}"> 
+                                <!-- pattern: expresión regular que limita caracteres específicos -->
+                                
+								<div class="invalid-feedback">Ingrese nombres válidos.</div>
                              </div>
                           </div>
                           
                           <div class="row g-3 mb-3">
                              <div class="col-md-5">
                                 <label class="form-label text-secondary small fw-bold">Apellidos</label>
-                                <input type="text" class="form-control" name="apellido_<%= i %>" required>
+                                <input type="text" class="form-control" name="apellido_<%= i %>" required pattern="[A-Za-zÁÉÍÓÚáéíóúÑñ ]{2,100}">
+								<div class="invalid-feedback">Ingrese Apellido válido.</div>
                              </div>
                              <div class="col-md-4">
                                 <label class="form-label text-secondary small fw-bold">Correo electrónico</label>
@@ -121,7 +145,8 @@
                              </div>
                              <div class="col-md-3">
                                 <label class="form-label text-secondary small fw-bold">Teléfono</label>
-                                <input type="number" class="form-control" name="telefono_<%= i %>" required>
+                                <input type="text" class="form-control" name="telefono_<%= i %>" required maxlength="9" pattern="[0-9]{9}">
+								<div class="invalid-feedback">Ingrese un teléfono válido de 9 dígitos.</div>
                              </div>
                           </div>
                           
@@ -219,22 +244,65 @@
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
 
 <script type="text/javascript">
-    (function () {
-      'use strict'
-      var forms = document.querySelectorAll('.needs-validation')
 
-      Array.prototype.slice.call(forms)
-        .forEach(function (form) {
-          form.addEventListener('submit', function (event) {
-            if (!form.checkValidity()) {
-              event.preventDefault()
-              event.stopPropagation()
+(function () {
+    'use strict';
+
+    const form = document.getElementById('formReserva');
+    if (!form) return;
+
+    form.addEventListener('submit', function (event) {
+
+        let documentos = new Set();
+        let cantidad = <%= cantidadSeleccionados %>;
+        let camposCompletos = true;
+
+        // 1. VALIDAR CAMPOS VACÍOS PRIMERO
+        for (let i = 0; i < cantidad; i++) {
+            let tipo = document.getElementsByName('tipoDocumento_' + i)[0].value.trim();
+            let nro = document.getElementsByName('nroDocumento_' + i)[0].value.trim();
+            let nombre = document.getElementsByName('nombre_' + i)[0].value.trim();
+            let apellido = document.getElementsByName('apellido_' + i)[0].value.trim();
+            let correo = document.getElementsByName('correo_' + i)[0].value.trim();
+            let telefono = document.getElementsByName('telefono_' + i)[0].value.trim();
+            let fechaNacimiento = document.getElementsByName('fechaNacimiento_' + i)[0].value.trim();
+            let nacionalidad = document.getElementsByName('nacionalidad_' + i)[0].value.trim();
+            let genero = document.getElementsByName('genero_' + i)[0].value.trim();
+
+            if (!tipo || !nro || !nombre || !apellido || !correo || !telefono || !fechaNacimiento || !nacionalidad || !genero) {
+                camposCompletos = false;
+                break;
             }
-            form.classList.add('was-validated')
-          }, false)
-        })
-    })()
+        }
+
+        // Si hay campos vacíos → parar aquí
+        if (!form.checkValidity() || !camposCompletos) {
+            event.preventDefault();
+            event.stopPropagation();
+            form.classList.add('was-validated');
+            return; // CLAVE: no seguir validando
+        }
+
+        // 2. VALIDAR DUPLICADOS (ya con datos completos)
+        for (let i = 0; i < cantidad; i++) {
+            let tipo = document.getElementsByName('tipoDocumento_' + i)[0].value.trim();
+            let nro = document.getElementsByName('nroDocumento_' + i)[0].value.trim();
+
+            let claveDocumento = tipo + "-" + nro;
+
+            if (documentos.has(claveDocumento)) {
+                alert("No se puede registrar el mismo pasajero dos veces en la misma reserva.");
+                event.preventDefault();
+                return;
+            } else {
+                documentos.add(claveDocumento);
+            }
+        }
+
+    }, false);
+})();
 </script>
+
 
 </body>
 </html>

@@ -8,12 +8,15 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 
 import dao.DetalleReservaDAO;
 import dao.PasajeroDAO;
 import dao.ReservaDAO;
 import dao.ViajeAsientoDAO;
 import dao.ViajeDAO;
+import entidades.DetalleReserva;
 import entidades.Pasajero;
 import entidades.Reserva;
 import entidades.Viaje;
@@ -98,14 +101,70 @@ public class ReservaServlet extends HttpServlet {
 		String asientosSeleccionados = request.getParameter("asientosSeleccionados");
 		ArrayList<Pasajero> listaPasajeros = new ArrayList<Pasajero>();
 		
+		// 0. Validar que los datos lleguen correctamente del frontend
+		Set<String> documentos = new HashSet<>();
+		ArrayList<String> errores = new ArrayList<>();
+
+		for (int i = 0; i < cantidadSeleccionados; i++) {
+
+		    String tipoDocumento = request.getParameter("tipoDocumento_" + i);
+		    String nroDocumento = request.getParameter("nroDocumento_" + i);
+		    String nombre = request.getParameter("nombre_" + i);
+		    String apellido = request.getParameter("apellido_" + i);
+		    String correo = request.getParameter("correo_" + i);
+		    String telefono = request.getParameter("telefono_" + i);
+		    String fechaNacimiento = request.getParameter("fechaNacimiento_" + i);
+		    String nacionalidad = request.getParameter("nacionalidad_" + i);
+		    String genero = request.getParameter("genero_" + i);
+
+		    // 1. CAMPOS VACÍOS
+		    if (tipoDocumento == null || tipoDocumento.trim().isEmpty() ||
+		        nroDocumento == null || nroDocumento.trim().isEmpty() ||
+		        nombre == null || nombre.trim().isEmpty() ||
+		        apellido == null || apellido.trim().isEmpty() ||
+		        correo == null || correo.trim().isEmpty() ||
+		        telefono == null || telefono.trim().isEmpty() ||
+		        fechaNacimiento == null || fechaNacimiento.trim().isEmpty() ||
+		        nacionalidad == null || nacionalidad.trim().isEmpty() ||
+		        genero == null || genero.trim().isEmpty()) {
+
+		        errores.add("Todos los campos del pasajero " + (i + 1) + " son obligatorios.");
+		        continue;
+		    }
+
+		    // 2. VALIDAR DNI
+		    if ("DNI".equals(tipoDocumento) && !nroDocumento.matches("\\d{8}")) {
+		        errores.add("El DNI del pasajero " + (i + 1) + " debe tener 8 dígitos.");
+		    }
+
+		    // 3. VALIDAR DUPLICADOS
+		    String clave = tipoDocumento + "-" + nroDocumento;
+
+		    if (documentos.contains(clave)) {
+		        errores.add("El pasajero " + (i + 1) + " está duplicado.");
+		    } else {
+		        documentos.add(clave);
+		    }
+		}
+		
+		// Si se encontró errores en las validaciones
+		if (!errores.isEmpty()) {
+
+		    Viaje viaje = viajeDAO.obtener(idViaje);
+
+		    request.setAttribute("errores", errores);
+		    request.setAttribute("viaje", viaje);
+		    request.setAttribute("cantidadSeleccionados", cantidadSeleccionados);
+		    request.setAttribute("totalPagar", totalPagar);
+		    request.setAttribute("asientosSeleccionados", asientosSeleccionados);
+
+		    request.getRequestDispatcher("/ventas/reserva.jsp").forward(request, response);
+		    return;
+		}
+		
 		// 1. Registrar cabecera de reserva
-		Reserva reserva = new Reserva();
-		reserva.setIdUsuario(0); //Luego debe venir de la sesión del usuario
-		reserva.setIdViaje(idViaje);
-		reserva.setCodigoReserva(generarCodigoReserva());
-		reserva.setMontoTotal(totalPagar);
-		reserva.setMetodoPago("PAGO WEB");
-		reserva.setEstado("PAGADA");
+		Reserva reserva = new Reserva(0, idViaje, generarCodigoReserva(), "",
+				totalPagar, "PAGO WEB", "PAGADA");
 		
 		int idReserva = reservaDAO.crear(reserva);
 		
@@ -126,17 +185,8 @@ public class ReservaServlet extends HttpServlet {
 			int nroAsiento = Integer.parseInt(asientoStr);
 
 			//2.1. Registrar los pasajeros
-			Pasajero pasajero = new Pasajero();
-			pasajero.setTipoDocumento(tipoDocumento);
-			pasajero.setNroDocumento(nroDocumento);
-			pasajero.setNombre(nombre);
-			pasajero.setApellido(apellido);
-			pasajero.setCorreo(correo);
-			pasajero.setTelefono(telefono);
-			pasajero.setFechaNacimiento(LocalDate.parse(fechaNacimiento));
-			pasajero.setNacionalidad(nacionalidad);
-			pasajero.setGenero(genero);
-			pasajero.setEstado(1);
+			Pasajero pasajero = new Pasajero(tipoDocumento, nroDocumento, nombre, apellido,
+					correo, telefono, LocalDate.parse(fechaNacimiento), nacionalidad, genero, 1);
 			
 			int idPasajero = 0;
 			idPasajero = pasajeroDAO.crear(pasajero);
@@ -144,22 +194,14 @@ public class ReservaServlet extends HttpServlet {
 			
 			
 			// 2.2 Registrar los asientos para el viaje
-			ViajeAsiento viajeAsiento = new ViajeAsiento();
-			viajeAsiento.setIdViaje(idViaje);
-			viajeAsiento.setNroAsiento(nroAsiento);
-			viajeAsiento.setPiso(1);
-			viajeAsiento.setEstado(1);
+			ViajeAsiento viajeAsiento = new ViajeAsiento(idViaje, nroAsiento, 1, 1);
 			
 			int idViajeAsiento = 0;
 			idViajeAsiento = viajeAsientoDAO.crear(viajeAsiento);
 			
 			//2.3 Registrar el Detalle de la Cabecera de la Reserva
-			DetalleReserva detalle = new DetalleReserva();
-			detalle.setIdReserva(idReserva);
-			detalle.setIdViajeAsiento(idViajeAsiento);
-			detalle.setIdPasajero(idPasajero);
-			detalle.setPrecioPagado(totalPagar / cantidadSeleccionados);
-
+			DetalleReserva detalle = new DetalleReserva(idReserva, idViajeAsiento, idPasajero,0.0);
+			
 			detalleReservaDAO.crear(detalle);
 		}
 		
