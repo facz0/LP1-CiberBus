@@ -14,7 +14,7 @@
 <link rel="stylesheet"
 	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
 
-<link rel="stylesheet" href="css/destino.css">
+<link rel="stylesheet" href="CSS/destino.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
 
@@ -44,7 +44,7 @@
 							class="card h-100 shadow-sm border-0 rounded-4 overflow-hidden">
 							<img
 								src="./imagenes/plazaLima.png"
-								class="card-img-top" alt="Lima">
+								class="card-img-top"  alt="Lima">
 							<div class="card-body text-center">
 								<p class="destino-label mb-0 text-secondary">
 									Viaja a <span class="text-dark fw-bold">Lima</span>

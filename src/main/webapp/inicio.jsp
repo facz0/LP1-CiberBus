@@ -13,7 +13,7 @@
 	integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
 	crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-<link rel="stylesheet" href="css/inicio.css">
+<link rel="stylesheet" href="CSS/inicio.css">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
 <body class="d-flex flex-column min-vh-100">
@@ -94,9 +94,9 @@
 
 				<form id="formBusqueda" action="inicio?opcion=buscarDestinos"
 					method="post">
-					<div class="row g-3 align-items-center">
+					<div class="row g-3 ">
 
-						<div class="col-md-2 mt-auto">
+						<div class="col-md-3">
 							<label class="form-label fw-bold">Origen</label> <select
 								class="form-select form-select-lg" name="origenId"
 								onchange="buscarDestinos();">
@@ -116,7 +116,7 @@
 							</select>
 						</div>
 
-						<div class="col-md-2 mt-auto">
+						<div class="col-md-3">
 							<label class="form-label fw-bold">Destino</label> <select
 								class="form-select form-select-lg" name="rutaId">
 								<option value="">Seleccione destino</option>
@@ -135,19 +135,19 @@
 							</select>
 						</div>
 
-						<div class="col-md-2 mt-auto">
+						<div class="col-md-2 ">
 							<label class="form-label fw-bold">Fecha de Partida</label> <input
 								type="date" class="form-control form-control-lg"
 								name="fechaViaje" value="<%=fechaViaje%>">
 						</div>
 
-						<div class="col-md-2 mt-auto">
+						<div class="col-md-2 ">
 							<label class="form-label fw-bold">Fecha de Retorno</label> <input
 								type="date" class="form-control form-control-lg"
 								name="fechaViaje" value="<%=fechaViaje%>">
 						</div>
 
-						<div class="col-md-3 mt-auto">
+						<div class="col-md-2 d-flex align-items-end">
 							<button type="button"
 								class="btn btn-warning btn-lg w-100 fw-bold"
 								onclick="buscarRutas();">
@@ -488,6 +488,7 @@
                  origenId: { required: 'Debe seleccionar el origen' },
                  rutaId: { required: 'Debe seleccionar el destino' },
                  fechaViaje: { required: 'Debe seleccionar la fecha de viaje' }
+                 
               },
               errorElement: "div",
               errorClass: "text-danger small mt-1",

@@ -1,10 +1,12 @@
 @charset "UTF-8";
 
 .card-img-top {
-	height: 220px;
+	height: 250px;
 	object-fit: cover;
 	width: 100%;
 }
+
+
 
 .destino-label {
 	font-size: 1.1rem;
@@ -20,6 +22,10 @@
 }
 
 .espacio {
-	width: 80px
-	border 3px solid #001242;
+	width: 80px;
+	border: 3px solid #001242;
+}
+
+body {
+	background: red;
 }
