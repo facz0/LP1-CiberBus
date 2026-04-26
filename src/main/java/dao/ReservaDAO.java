@@ -3,6 +3,7 @@ package dao;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.ArrayList;
 
 import db.MySQLConexion;
 import entidades.Reserva;
@@ -46,6 +47,18 @@ public class ReservaDAO implements IReservaDAO{
 		}
 
 		return id;
+	}
+
+	@Override
+	public ArrayList<Reserva> listar() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Reserva obtener(int idReserva) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 	
 }

@@ -8,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class AutogestionServlet
+ * Servlet implementation class ContactoServlet
  */
-@WebServlet(name = "autogestion", urlPatterns = { "/autogestion" })
-public class AutogestionServlet extends HttpServlet {
+@WebServlet(name = "contacto", urlPatterns = { "/contacto" })
+public class ContactoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AutogestionServlet() {
+    public ContactoServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class AutogestionServlet extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 request.getRequestDispatcher("/ventas/autogestion.jsp").forward(request, response);
+		request.getRequestDispatcher("ventas/contacto.jsp").forward(request, response);
 	}
 
 }

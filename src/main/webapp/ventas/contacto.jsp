@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
+<link rel="stylesheet" href="css/inicio.css">
+
+</head>
+	<body>
+	
+	<header>
+		<%@ include file="/shared/navbar.jsp"%>
+	</header>
+	
+	<section>
+		<div id="miCarrusel" class="carousel slide" data-bs-ride="carousel">
+			<div class="carousel-indicators">
+				<button type="button" data-bs-target="#miCarrusel"
+					data-bs-slide-to="0" class="active"></button>
+				<button type="button" data-bs-target="#miCarrusel"
+					data-bs-slide-to="1"></button>
+				<button type="button" data-bs-target="#miCarrusel"
+					data-bs-slide-to="2"></button>
+			</div>
+
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="/LP1-CiberBus/imagenes/banner_contacto_recortado1.png"
+						class="d-block w-100" alt="Destino 1">
+					<div class="carousel-caption d-none d-md-block"></div>
+				</div>
+
+				<div class="carousel-item">
+					<img src="/LP1-CiberBus/imagenes/banner_contacto_2.png" class="d-block w-100"
+						alt="Destino 2">
+					<div class="carousel-caption d-none d-md-block"></div>
+				</div>
+
+				<div class="carousel-item">
+					<img src="/LP1-CiberBus/imagenes/banner_contacto_3.png" class="d-block w-100"
+						alt="Destino 3">
+					<div class="carousel-caption d-none d-md-block"></div>
+				</div>
+			</div>
+
+			<button class="carousel-control-prev" type="button"
+				data-bs-target="#miCarrusel" data-bs-slide="prev">
+				<span class="carousel-control-prev-icon"></span>
+			</button>
+			<button class="carousel-control-next" type="button"
+				data-bs-target="#miCarrusel" data-bs-slide="next">
+				<span class="carousel-control-next-icon"></span>
+			</button>
+		</div>
+	</section>
+
+	<section class="py-5 bg-light">
+		<div class="container ">
+
+			<div class="text-center mb-5">
+				<h1 class="fw-bold display-4">Contáctanos</h1>
+				<p class="lead text-secondary">Estamos aquí para ayudarte.
+					Escríbenos y te responderemos lo antes posible.</p>
+			</div>
+
+			<div class="card border-0 shadow-lg rounded-4">
+				<div class="card-body p-5">
+
+					<h4 class="text-center fw-bold mb-4 text-uppercase">Contacta
+						con nosotros</h4>
+
+					<form id="formContacto" action="curso?opcion=registrar"
+						method="post">
+
+						<div class="row g-4">
+
+						
+							<div class="col-md-6">
+								<input type="text" class="form-control form-control-lg"
+									name="nombre" placeholder="Nombre y Apellido">
+							</div>
+
+							
+							<div class="col-md-6">
+								<input type="email" class="form-control form-control-lg"
+									name="correo" placeholder="Correo electrónico">
+							</div>
+
+					
+							<div class="col-md-6">
+								<input type="text" class="form-control form-control-lg"
+									name="telefono" placeholder="Teléfono">
+							</div>
+
+							
+							<div class="col-md-6">
+								<input type="text" class="form-control form-control-lg"
+									name="referente" placeholder="Asunto">
+							</div>
+
+							
+							<div class="col-12">
+								<textarea class="form-control form-control-lg" name="mensaje"
+									rows="5" placeholder="Escribe tu mensaje..."></textarea>
+							</div>
+
+							<
+							<div class="col-12 text-end">
+								<button type="submit" class="btn btn-dark btn-lg px-5 shadow-sm">
+									Enviar mensaje</button>
+							</div>
+
+						</div>
+
+					</form>
+				</div>
+			</div>
+		</div>
+	</section>
+	
+
+		<%@ include file="/shared/footer.jsp"%>
+
+	
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous"></script>
+	
+</body>
+</html>

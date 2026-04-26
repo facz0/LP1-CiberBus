@@ -1,18 +1,24 @@
 <%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Ruta"%>
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Inicio - CiberBus</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB"
+	crossorigin="anonymous">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
-<link rel="stylesheet" href="${pageContext.request.contextPath}/CSS/inicio.css">
+<link rel="stylesheet" href="CSS/inicio.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body>
+<body class="d-flex flex-column min-vh-100">
 
-    <%@ include file="/shared/navbar.jsp"%>
+	<%@ include file="/shared/navbar.jsp"%>
 
     <%
     	ArrayList<Ruta> listaOrigen = (ArrayList<Ruta>) request.getAttribute("listaOrigen");
@@ -222,6 +228,7 @@
                  origenId: { required: 'Debe seleccionar el origen' },
                  rutaId: { required: 'Debe seleccionar el destino' },
                  fechaViaje: { required: 'Debe seleccionar la fecha de viaje' }
+                 
               },
               errorElement: "div",
               errorClass: "text-danger small mt-1",
