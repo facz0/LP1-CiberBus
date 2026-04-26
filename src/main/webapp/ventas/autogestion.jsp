@@ -29,6 +29,16 @@
                         <div class="card-body p-5 bg-white rounded-4">
 
                             <h3 class="fw-bold mb-3" style="color: #4f699c;">Mis viajes</h3>
+                            <%
+								String mensajeError = (String) request.getAttribute("mensajeError");
+								if(mensajeError != null){
+							%>
+								<div class="alert alert-warning">
+									<%= mensajeError %>
+								</div>
+							<%
+								}
+							%>
 
                             <p class="text-secondary">
                                 Ingresa tu código de reserva y correo electrónico para consultar tu compra.
@@ -36,7 +46,7 @@
 
                             <hr class="my-4 text-muted opacity-25">
 
-                            <form id="formMisViajes" class="mt-4" novalidate>
+                            <form id="formMisViajes" class="mt-4" action="reserva?opcion=consultarReserva" method="post">
 
                                 <div class="row g-4">
                                     <div class="col-md-6">
@@ -47,10 +57,10 @@
                                     </div>
 
                                     <div class="col-md-6">
-                                        <label class="form-label text-secondary small fw-bold">Correo electrónico</label>
-                                        <input type="email" name="correo" id="correo"
+                                        <label class="form-label text-secondary small fw-bold">Apellido</label>
+                                        <input type="text" name="apellido" id="apellido"
                                             class="form-control form-control-lg shadow-sm"
-                                            placeholder="tu@correo.com">
+                                            placeholder="Apellido">
                                     </div>
                                 </div>
 
@@ -78,38 +88,35 @@
     <script src="https://cdn.jsdelivr.net/npm/jquery-validation@1.19.5/dist/jquery.validate.min.js"></script>
 
     <script type="text/javascript">
-       function consultarCompra() {
-          if ($("#formMisViajes").valid()) {
-             document.getElementById("formMisViajes").action = "viaje?opcion=consultarCompra";
-             document.getElementById("formMisViajes").submit();
-          }
-       }
+    	function consultarCompra() {
+    	   if ($("#formMisViajes").valid()) {
+    	      document.getElementById("formMisViajes").submit();
+    	   }
+    	}
 
        $(() => {
           $('#formMisViajes').validate({
              rules: {
                 codigoReserva: {
                    required: true,
-                   digits: true,
                    minlength: 5,
-                   maxlength: 5
+                   maxlength: 20
                 },
-                correo: {
-                   required: true,
-                   email: true
-                }
+                apellido: {
+                	   required: true,
+                	   minlength: 2
+                	}
              },
              messages: {
                 codigoReserva: {
                    required: 'Debe ingresar el código de reserva',
-                   digits: 'El código debe contener solo números',
                    minlength: 'El código debe tener exactamente 5 dígitos',
-                   maxlength: 'El código debe tener exactamente 5 dígitos'
+                   maxlength: 'El código debe tener exactamente 20 dígitos'
                 },
-                correo: {
-                   required: 'Debe ingresar un correo electrónico',
-                   email: 'Ingrese un correo válido'
-                }
+                apellido: {
+                	   required: 'Debe ingresar el apellido',
+                	   minlength: 'El apellido debe tener al menos 2 caracteres'
+                	}
              },
              errorElement: "div",
              errorClass: "text-danger small mt-1",

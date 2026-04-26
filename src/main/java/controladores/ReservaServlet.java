@@ -58,17 +58,63 @@ public class ReservaServlet extends HttpServlet {
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		String opcion = "";
 		if (request.getParameter("opcion") != null) opcion = request.getParameter("opcion");
-		
+		System.out.println("opcion:"+opcion);
 		switch (opcion) {
 		case "pagar" :
 			this.pagarReserva(request, response);
 			break;
+		case "consultarReserva" :
+			this.consultarReserva(request, response);
+			break;
         default:
-        	
            this.listarPasajeros(request, response);
      }
 	}
 	
+	private void consultarReserva(HttpServletRequest request, HttpServletResponse response)
+			throws ServletException, IOException {
+
+		try {
+			String codigoReserva = request.getParameter("codigoReserva");
+			String apellido = request.getParameter("apellido");
+			
+			System.out.println("codigoReserva:"+codigoReserva);
+			System.out.println("apellido:"+apellido);
+
+			ReservaDAO reservaDAO = new ReservaDAO();
+
+			Reserva reserva = reservaDAO.buscarPorCodigoYApellido(codigoReserva, apellido);
+
+			if (reserva == null) {
+				request.setAttribute("mensajeError", "No se encontró una reserva con los datos ingresados.");
+				request.getRequestDispatcher("/ventas/autogestion.jsp").forward(request, response);
+				return;
+			}
+
+			ArrayList<Pasajero> listaPasajeros = reservaDAO.listarPasajerosPorReserva(reserva.getIdReserva());
+			String asientosSeleccionados = reservaDAO.obtenerAsientosPorReserva(reserva.getIdReserva());
+
+			ViajeDAO viajeDAO = new ViajeDAO();
+			Viaje viaje = viajeDAO.obtener(reserva.getIdViaje());
+
+			request.setAttribute("viaje", viaje);
+			request.setAttribute("codigoReserva", reserva.getCodigoReserva());
+			request.setAttribute("cantidadSeleccionados", listaPasajeros.size());
+			request.setAttribute("totalPagar", reserva.getMontoTotal());
+			request.setAttribute("asientosSeleccionados", asientosSeleccionados);
+			request.setAttribute("listaPasajeros", listaPasajeros);
+
+			request.getRequestDispatcher("/ventas/consulta_reserva.jsp").forward(request, response);
+
+		} catch (Exception e) {
+			System.out.println("Error consultarReserva: " + e.getMessage());
+			e.printStackTrace();
+
+			request.setAttribute("mensajeError", "Ocurrió un error al consultar la reserva.");
+			request.getRequestDispatcher("/ventas/autogestion.jsp").forward(request, response);
+		}
+	}
+
 	protected void listarPasajeros(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 	       
 	       int idViaje = 0;
