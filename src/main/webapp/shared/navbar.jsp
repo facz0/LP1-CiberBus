@@ -51,7 +51,7 @@
 				</ul>
 
 				<div class="d-flex justify-content-center mt-3 mt-lg-0">
-					<a href="seccion" class="btn-profile text-light"> <i
+					<a href="iniciar_seccion" class="btn-profile text-light"> <i
 						class="bi bi-person-circle fs-4"></i>
 					</a>
 				</div>
@@ -75,8 +75,7 @@
 		});
 	</script>
 
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
 
 </body>
 </html>
