@@ -246,7 +246,8 @@ public class ReservaServlet extends HttpServlet {
 			idViajeAsiento = viajeAsientoDAO.crear(viajeAsiento);
 			
 			//2.3 Registrar el Detalle de la Cabecera de la Reserva
-			DetalleReserva detalle = new DetalleReserva(idReserva, idViajeAsiento, idPasajero,0.0);
+			double precioPorAsiento = totalPagar / cantidadSeleccionados;
+			DetalleReserva detalle = new DetalleReserva(idReserva, idViajeAsiento, idPasajero, precioPorAsiento);
 			
 			detalleReservaDAO.crear(detalle);
 		}
