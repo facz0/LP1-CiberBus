@@ -51,7 +51,7 @@
 				</ul>
 
 				<div class="d-flex justify-content-center mt-3 mt-lg-0">
-					<a href="iniciar_seccion" class="btn-profile text-light"> <i
+					<a href="seccion" class="btn-profile text-light"> <i
 						class="bi bi-person-circle fs-4"></i>
 					</a>
 				</div>

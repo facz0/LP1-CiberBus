@@ -37,3 +37,16 @@
   background-color: #4f699c;
 
 }
+   
+    .carousel-item img {
+        height: 500px; 
+        object-fit: cover;
+        object-position: center;
+    }
+
+   
+    @media (max-width: 768px) {
+        .carousel-item img {
+            height: 200px;
+        }
+    }

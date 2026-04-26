@@ -64,7 +64,7 @@
         <div class="mt-3">
             <small>
                 ¿Ya tienes cuenta?
-                <a href="iniciar_seccion" class="fw-bold text-decoration-none">Inicia sesión</a>
+                <a href="seccion" class="fw-bold text-decoration-none">Inicia sesión</a>
             </small>
         </div>
 
