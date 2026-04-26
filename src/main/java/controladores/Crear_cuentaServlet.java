@@ -8,16 +8,16 @@ import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
- * Servlet implementation class AutogestionServlet
+ * Servlet implementation class Crear_cuentaServelt
  */
-@WebServlet(name = "autogestion", urlPatterns = { "/autogestion" })
-public class AutogestionServlet extends HttpServlet {
+@WebServlet(name = "crear_cuenta", urlPatterns = { "/crear_cuenta" })
+public class Crear_cuentaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AutogestionServlet() {
+    public Crear_cuentaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,7 +27,7 @@ public class AutogestionServlet extends HttpServlet {
 	 */
 	protected void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
-		 request.getRequestDispatcher("/ventas/autogestion.jsp").forward(request, response);
+		request.getRequestDispatcher("login/crear_cuenta.jsp").forward(request, response);
 	}
 
 }
