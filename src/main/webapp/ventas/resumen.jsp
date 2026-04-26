@@ -1,4 +1,4 @@
-<%@page import="java.util.List"%>
+<%@page import="java.util.ArrayList"%>
 <%@page import="entidades.Viaje"%>
 <%@page import="entidades.Pasajero"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
@@ -22,7 +22,7 @@
 			int cantidadSeleccionados = 0;
 			double totalPagar = 0;
 			String asientosSeleccionados = "";
-			List<Pasajero> listaPasajeros = (List<Pasajero>) request.getAttribute("listaPasajeros");
+			ArrayList<Pasajero> listaPasajeros = (ArrayList<Pasajero>) request.getAttribute("listaPasajeros");
 			
 			if(request.getAttribute("codigoReserva") != null){
 				codigoReserva = "" + request.getAttribute("codigoReserva");

@@ -1,6 +1,6 @@
 package interfaces;
 
-import controladores.DetalleReserva;
+import entidades.DetalleReserva;
 
 public interface IDetalleReservaDAO {
 	public int crear(DetalleReserva d);
