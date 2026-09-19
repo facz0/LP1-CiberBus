@@ -5,12 +5,12 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class MySQLConexion {
-	
+
 	public static Connection getConexion() {
 		Connection con = null;
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
-			String url = "jdbc:mysql://localhost:3307/prueba_agencia_bus?useSSL=false&useTimezone=true&serverTimezone=UTC";
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			String url = "jdbc:mysql://localhost:3306/prueba_agencia_bus?useSSL=false&useTimezone=true&serverTimezone=UTC&allowPublicKeyRetrieval=true";
 			String usr = "root";
 			String psw = "Fab020698$";
 			con = DriverManager.getConnection(url, usr, psw);
@@ -26,10 +26,12 @@ public class MySQLConexion {
 
 	public static void closeConexion(Connection con) {
 		try {
-			con.close();
+			if (con != null) {
+				con.close();
+			}
 		} catch (SQLException e) {
 			System.out.println("Problemas al cerrar la conexion");
 		}
 	}
-	
+
 }

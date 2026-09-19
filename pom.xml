@@ -34,6 +34,23 @@
             <artifactId>mysql-connector-j</artifactId>
             <version>8.3.0</version>
         </dependency>
+
+        <!-- Tomcat Embebido para desarrollo local sin servidor externo -->
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
+            <version>11.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-jasper</artifactId>
+            <version>11.0.2</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-el</artifactId>
+            <version>11.0.2</version>
+        </dependency>
     </dependencies>
 
     <build>
@@ -42,6 +59,18 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-war-plugin</artifactId>
                 <version>3.4.0</version>
+                <configuration>
+                    <!-- Excluye librerías de Tomcat embebido al empaquetar el WAR para entregas -->
+                    <packagingExcludes>WEB-INF/lib/tomcat-*.jar,WEB-INF/lib/ecj-*.jar</packagingExcludes>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>exec-maven-plugin</artifactId>
+                <version>3.5.0</version>
+                <configuration>
+                    <mainClass>com.ciberbus.Launcher</mainClass>
+                </configuration>
             </plugin>
         </plugins>
     </build>
