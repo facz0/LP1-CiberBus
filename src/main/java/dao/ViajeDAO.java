@@ -26,7 +26,7 @@ public class ViajeDAO implements IViajeDAO{
 		return instancia;
 	}
 	
-	private ViajeDAO() {}
+	public ViajeDAO() {}
 	
 	@Override
 	public int crear(Viaje viaje) {

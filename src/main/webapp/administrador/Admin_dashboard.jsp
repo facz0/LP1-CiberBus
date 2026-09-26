@@ -31,7 +31,7 @@
 					<div class="offcanvas-body d-flex flex-column p-3">
 						<ul class="nav nav-pills flex-column mb-auto w-100">
 							<li class="nav-item mb-1"><a class="nav-link active"
-								aria-current="page" href="#">Página de inicio</a></li>
+								aria-current="page" href="inicio">Página de inicio</a></li>
 							<li class="nav-item mb-1"><hr></li>
 							<li class="nav-item mb-1"><spam class="nav-link active"
 									aria-current="page" href="#">Reportes</spam></li>

@@ -71,7 +71,7 @@
 					<h4 class="text-center fw-bold mb-4 text-uppercase">Contacta
 						con nosotros</h4>
 
-					<form id="formContacto" action="curso?opcion=registrar"
+					<form id="formContacto" action="#"
 						method="post">
 
 						<div class="row g-4">
@@ -106,9 +106,9 @@
 									rows="5" placeholder="Escribe tu mensaje..."></textarea>
 							</div>
 
-							<
+							
 							<div class="col-12 text-end">
-								<button type="submit" class="btn btn-dark btn-lg px-5 shadow-sm">
+								<button class="btn btn-dark btn-lg px-5 shadow-sm">
 									Enviar mensaje</button>
 							</div>
 

@@ -1,0 +1,43 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "type": "shell",
+            "label": "Maven: Explode WAR (Compilación rápida)",
+            "command": "mvn",
+            "args": [
+                "compile",
+                "war:exploded"
+            ],
+            "group": {
+                "kind": "build",
+                "isDefault": true
+            },
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "Maven: Package (Recompilar todo)",
+            "command": "mvn",
+            "args": [
+                "clean",
+                "package"
+            ],
+            "problemMatcher": []
+        },
+        {
+            "type": "shell",
+            "label": "Ejecutar CiberBus (Tomcat Embebido)",
+            "command": "mvn",
+            "args": [
+                "compile",
+                "exec:java"
+            ],
+            "group": {
+                "kind": "test",
+                "isDefault": false
+            },
+            "problemMatcher": []
+        }
+    ]
+}

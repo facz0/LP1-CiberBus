@@ -189,7 +189,7 @@
     <div class="container mt-4" style="margin-bottom: 120px;">
        <div class="row">
           <div class="col-12 text-center">
-             <a href="${pageContext.request.contextPath}/destinos/destino.jsp"
+             <a href="destino"
                 class="btn px-5 py-3 fw-bold shadow-sm"
                 style="background-color: #4f699c; color: white; border-radius: 10px; border: none; display: inline-block; text-decoration: none;">
                 VER TODOS LOS DESTINOS 
